@@ -1,0 +1,12 @@
+name: Pipeline
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Deploy
+        env: 
+          ATLAS_URI_SECRET: ${{ secrets.ATLAS_URI_SECRET }}
+        run: |
