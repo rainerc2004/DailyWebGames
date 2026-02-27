@@ -9,4 +9,6 @@ jobs:
       - name: Deploy
         env: 
           ATLAS_URI_SECRET: ${{ secrets.ATLAS_URI_SECRET }}
-        run: |
+        run: 
+          cd senior_project/server
+          node --env-file=config.env server
