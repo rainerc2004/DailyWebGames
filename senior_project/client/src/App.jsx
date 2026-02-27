@@ -1,11 +1,12 @@
 import { Outlet } from "react-router-dom";
+import Homepage from "./components/Homepage";
 import Navbar from "./components/Navbar";
 
 const App = () => {
     return (
-        <div className="w-full p-6">
+        <div className="flex flex-col h-screen">
             <Navbar />
-            <Outlet />
+            <Homepage />
         </div>
     );
 };
