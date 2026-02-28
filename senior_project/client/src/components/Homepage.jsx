@@ -7,7 +7,7 @@ export default function HomePage() {
                 Play my dailies!
             </NavLink>
             <NavLink className="w-[36rem] px-6 py-3 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
-                See my friend's scores!
+                See my friends' scores!
             </NavLink>
         </div>
 

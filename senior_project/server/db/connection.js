@@ -21,6 +21,6 @@ try {
   console.error(err);
 }
 
-let db = client.db("employees");
+let db = client.db("daily_web_games");
 
 export default db;
