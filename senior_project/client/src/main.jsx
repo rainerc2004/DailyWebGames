@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import App from "./App";
 import Play from "./components/Play";
+import LeaderboardPage from "./components/LeaderboardPage";
 import "./index.css";
  
 const router = createBrowserRouter([
@@ -18,7 +19,12 @@ const router = createBrowserRouter([
        path: "play",
        element: <Play />,
        children: []
-   }
+    },
+    {
+        path: "leaderboards",
+        element: <LeaderboardPage />,
+        children: []
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
