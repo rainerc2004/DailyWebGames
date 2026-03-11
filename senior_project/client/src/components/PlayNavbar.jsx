@@ -15,9 +15,9 @@ export default function PlayNavbar({ updateSite }) {
                         Wordle
                     </button>
                     <button
-                        onClick={() => updateSite("https://worldle.teuteuf.fr/")}
+                        onClick={() => updateSite("https://www.britannica.com/games/octordle/daily")}
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
-                        Worldle
+                        Octordle
                     </button>
                     <button
                         onClick={() => updateSite("https://wafflegame.net/daily")}
