@@ -7,6 +7,7 @@ import {
 import App from "./App";
 import Play from "./components/Play";
 import LeaderboardPage from "./components/LeaderboardPage";
+import ProfilePage from "./components/ProfilePage";
 import "./index.css";
  
 const router = createBrowserRouter([
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
     {
         path: "leaderboards",
         element: <LeaderboardPage />,
+        children: []
+    },
+    {
+        path: "profile",
+        element: <ProfilePage />,
         children: []
     }
 ]);
