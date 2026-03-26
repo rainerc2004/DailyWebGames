@@ -28,6 +28,14 @@ router.get("/:id", async (req, res) => {
     else res.send(result).status(200);
 });
 
+// This section will help you get a list of all friends of a user by user_id
+router.get("user/:user_id", async (req, res) => {
+    let collection = await db.collection("friends");
+    let query = { user_id_1: { $eq: req.params.user_id}, status: { $eq: "friends"}};
+    let result = await collection.find(query, { user_id_1: 0, user_id_2: 1, _id: 1});
+    res.send(results.status(200));
+})
+
 // This section will help you create a new friend relationship.
 router.post("/", async (req, res) => {
     try {
