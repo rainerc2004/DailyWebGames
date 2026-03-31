@@ -3,17 +3,22 @@ import { Link } from "react-router-dom";
 
 const Record = (props) => (
     <div>
-        <p>{props.index}. {props.record.user_name}</p>
+        <p>{props.index}. {props.record.user_name} - {props.record.score_value}/{props.record.score_opt}</p>
     </div>
 );
 
-export default function RecordList() {
+export default function RecordList({game_name, user_name, day}) {
     const [records, setRecords] = useState([]);
     
-    // This method fetches the records from the database.
+    // This method fetches the scores from the database based on user's friends list, game_name, and day.
     useEffect(() => {
         async function getRecords() {
-            const response = await fetch(`http://localhost:5050/score/`);
+            const response = await fetch(`http://localhost:5050/score/user/${user_name}/${game_name}/${day}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
             if (!response.ok) {
                 const message = `An error occurred: ${response.statusText}`;
                 console.error(message);
@@ -39,7 +44,7 @@ export default function RecordList() {
     
     // This method will map out the records on the table
     function recordList() {
-        return records.map((record, index, title) => {
+        return records.map((record, index) => {
             return (
                 <Record
                     index={index+1}
@@ -57,7 +62,7 @@ export default function RecordList() {
                 Leaderboard
             </div>
             <div className="text-l py-1">
-                <i>Wordle</i>
+                <i>{game_name} - #{day}</i>
             </div>
             {recordList()}
         </div>

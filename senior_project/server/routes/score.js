@@ -14,10 +14,58 @@ const router = express.Router();
 // This section will help you get a list of all the scores.
 router.get("/", async (req, res) => {
     let collection = await db.collection("scores");
-    let query = { user_id: { $in: ["user_id", "user_id2"]}};
-    let results = await collection.find(query).toArray();
+    //let query = { user_id: { $in: ["user_id", "user_id2"]}};
+    let results = await collection.find({}).toArray();
     res.send(results).status(200);
 });
+
+
+// This section will help you get a list of scores from User('s friends), Game name, and Day
+router.get("/user/:username/:gamename/:day", async (req,res) => {
+    // Get records of friends of user
+    let collection = await db.collection("friends");
+    let query = { user_name_1: {$eq: req.params.username}, status: {$eq: "friends"} };
+    let results = await collection.find(query).toArray();
+
+    // Create list of friends list usernames
+    let friend_names = [];
+    for(let i = 0; i < results.length; i++) {
+        friend_names.push(results[i].user_name_2);
+    }
+    friend_names.push(req.params.username);
+    
+    // Determine sort order (1 = ascending, -1 = descending)
+    collection = await db.collection("games");
+    query = { title: {$eq: req.params.gamename} };
+    results = await collection.findOne(query);
+    
+    let sort_direction = 1;
+    if(results.score_goal == 'min') {
+        sort_direction = 1;
+    } else if(results.score_goal == 'max') {
+        sort_direction = -1;
+    } else {
+        //throw new Error('Error: score_goal not declared for ', req.params.gamename);
+        res.send().status(404);
+    }
+
+    // Get records of scores
+    collection = await db.collection("scores");
+    query = { user_name: {$in: friend_names}, game_name: {$eq: req.params.gamename}, day: {$eq: Number(req.params.day)} };
+    results = await collection.find(query).sort({score_value: sort_direction}).toArray();
+
+    // TODO: Change a score of "-1" to "X"
+    /*
+    for(let j = 0; j < results.length; j++) {
+        if(results[j].score_value == -1) {
+            results[j].score_text == 'X';
+        }
+    }
+    */
+
+    res.send(results).status(200);
+});
+
 
 // This section will help you get a single score by id
 router.get("/:id", async (req, res) => {
@@ -30,14 +78,6 @@ router.get("/:id", async (req, res) => {
 });
 
 // This section will help you get a list of scores by user_id
-
-// This section will help you get a list of scores by game_id
-/*
-router.get("/game_id/", async (req,res) => {
-    let collection = await db.collection("scores");
-    let query = { }
-});
-*/
 
 
 // This section will help you get a list of scores by 
