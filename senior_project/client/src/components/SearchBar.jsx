@@ -5,7 +5,13 @@ export default function SearchBar() {
 
     const handleSearch = () => {
         console.log("Searching for:", query);
-        // TODO: CONNECT TO BACKEND TO SEARCH DATABASES OF GAMES, USERS, AND LISTS!
+        window.location.href = "/search/?search=".concat(query);
+    };
+
+    const handleEnter = (event) => {
+        if (event.key === 'Enter') {
+            handleSearch();
+        }
     };
 
     return (
@@ -14,6 +20,7 @@ export default function SearchBar() {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={handleEnter}
                 placeholder="Search games, lists, and users."
                 className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
             />
