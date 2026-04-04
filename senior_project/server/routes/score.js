@@ -20,8 +20,19 @@ router.get("/", async (req, res) => {
 });
 
 
+// This section will help you get a list of last week of scores from User, Game name, and Day
+router.get("/gamehistory/:username/:gamename/:day", async (req,res) => {
+    // Get records of scores
+    let collection = await db.collection("scores");
+    let query = { user_name: {$eq: req.params.username}, game_name: {$eq: req.params.gamename}, day: {$in: [Number(req.params.day), Number(req.params.day) - 1, Number(req.params.day) - 2, Number(req.params.day) - 3, Number(req.params.day) - 4, Number(req.params.day) - 5, Number(req.params.day) - 6]} };
+    let results = await collection.find(query).sort({day: -1}).toArray();
+
+    res.send(results).status(200);
+});
+
+
 // This section will help you get a list of scores from User('s friends), Game name, and Day
-router.get("/user/:username/:gamename/:day", async (req,res) => {
+router.get("/leaderboard/:username/:gamename/:day", async (req,res) => {
     // Get records of friends of user
     let collection = await db.collection("friends");
     let query = { user_name_1: {$eq: req.params.username}, status: {$eq: "friends"} };
@@ -52,20 +63,10 @@ router.get("/user/:username/:gamename/:day", async (req,res) => {
     // Get records of scores
     collection = await db.collection("scores");
     query = { user_name: {$in: friend_names}, game_name: {$eq: req.params.gamename}, day: {$eq: Number(req.params.day)} };
-    results = await collection.find(query).sort({score_value: sort_direction}).toArray();
-
-    // TODO: Change a score of "-1" to "X"
-    /*
-    for(let j = 0; j < results.length; j++) {
-        if(results[j].score_value == -1) {
-            results[j].score_text == 'X';
-        }
-    }
-    */
+    results = await collection.find(query).sort({score_int: sort_direction}).toArray();    
 
     res.send(results).status(200);
 });
-
 
 // This section will help you get a single score by id
 router.get("/:id", async (req, res) => {

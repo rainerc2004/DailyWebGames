@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 
 const Record = (props) => (
     <div>
-        <p>{props.index}. {props.record.user_name} - {props.record.score_value}/{props.record.score_opt}</p>
+        <p>{props.index}. {props.record.user_name} - {props.record.score_str}/{props.record.denominator}</p>
     </div>
 );
 
-export default function RecordList({game_name, user_name, day}) {
+export default function RecordList({user_name, game_name, day}) {
     const [records, setRecords] = useState([]);
     
     // This method fetches the scores from the database based on user's friends list, game_name, and day.
     useEffect(() => {
         async function getRecords() {
-            const response = await fetch(`http://localhost:5050/score/user/${user_name}/${game_name}/${day}`, {
+            const response = await fetch(`http://localhost:5050/score/leaderboard/${user_name}/${game_name}/${day}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -30,17 +30,6 @@ export default function RecordList({game_name, user_name, day}) {
         getRecords();
         return;
     }, [records.length]);
-
-
-    // This method will delete a record
-    async function deleteRecord(id) {
-        await fetch(`http://localhost:5050/score/${id}`, {
-            method: "DELETE",
-        });
-        const newRecords = records.filter((el) => el._id !== id);
-        setRecords(newRecords);
-    }
-
     
     // This method will map out the records on the table
     function recordList() {
@@ -49,7 +38,6 @@ export default function RecordList({game_name, user_name, day}) {
                 <Record
                     index={index+1}
                     record={record}
-                    deleteRecord={() => deleteRecord(record._id)}
                     key={record._id}
                 />
             );

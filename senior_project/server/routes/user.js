@@ -18,6 +18,19 @@ router.get("/", async (req, res) => {
     res.send(results).status(200);
 });
 
+
+// This section will help you get a single user by user_name
+router.get("/profile/:username", async (req, res) => {
+    let collection = await db.collection("users");
+    let query = { user_name: {$eq: req.params.username} };
+    let result = await collection.findOne(query);
+    //console.log(result);
+
+    if (!result) res.send("Not found").status(404);
+    else res.send(result).status(200);
+});
+
+
 // This section will help you get a single user by id
 router.get("/:id", async (req, res) => {
     let collection = await db.collection("users");
