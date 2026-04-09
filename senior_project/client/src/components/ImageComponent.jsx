@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function ImageComponent({folder, imageName}) {
+function ImageComponent({folder, imageName, className = "rounded-lg"}) {
   const [imageSrc, setImageSrc] = useState(null);
   //const folder = '../assets';
   //const imageName = 'sumrall.jpg'; // Example image name
@@ -22,7 +22,7 @@ function ImageComponent({folder, imageName}) {
   return (
     <div>
       {imageSrc ? 
-        <img src={imageSrc} alt="Dynamically loaded image" className="rounded-lg" /> 
+        <img src={imageSrc} alt="Dynamically loaded image" className={className} /> 
         : <div>Loading image...</div>}
     </div>
   );
