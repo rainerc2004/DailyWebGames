@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import GameHistory from "./GameHistory";
 import ProfilePanel from "./ProfilePanel";
+import FriendsPanel from "./FriendsPanel";
 
 const ProfilePage = () => {
     return (
@@ -25,6 +26,7 @@ const ProfilePage = () => {
                         {/*<GameHistory />*/}
                     </div>
                 </div>
+                <FriendsPanel user_name="user"/>
             </div>
         </div>
     );
