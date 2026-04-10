@@ -35,7 +35,7 @@ export default function ProfilePanel({user_name}) {
                 {user_name}
             </div>
             <div className="py-6">
-                <ImageComponent folder="../assets/profile_pictures/" imageName={record.profile_image} className="rounded-lg"/>
+                <ImageComponent folder="../assets/profile_pictures/" image_name={record.profile_image} className="rounded-lg"/>
             </div>
             <div>
                 <p>{record.description}</p>

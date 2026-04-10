@@ -31,6 +31,24 @@ router.get("/profile/:username", async (req, res) => {
 });
 
 
+// This section will get the results of searching the users table
+router.get("/search", async (req, res) => {
+    let collection = await db.collection("users");
+    let results = await collection.find({}).toArray();
+
+    res.send(results).status(200);   
+});
+
+// This section will get the results of searching the users table with a query
+router.get("/search/:search", async (req, res) => {
+    let collection = await db.collection("users");
+    let query = { user_name: {$regex: req.params.search, $options: 'i'} };
+    let results = await collection.find(query).toArray();
+
+    res.send(results).status(200);   
+});
+
+
 // This section will help you get a single user by id
 router.get("/:id", async (req, res) => {
     let collection = await db.collection("users");

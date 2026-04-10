@@ -8,15 +8,15 @@ const LeaderboardPage = () => {
             <Navbar />
             <div className="grid flex flex-col flex-1 items-start justify-start grid-cols-5 px-3">
                 <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6">
-                    <Leaderboard user_name="@user" game_name="Wordle" day={1747}/>
-                    {<Leaderboard user_name="@user" game_name="Octordle" day={1528}/> }
+                    <Leaderboard user_name="user" game_name="Wordle" day={1747}/>
+                    {<Leaderboard user_name="user" game_name="Octordle" day={1528}/> }
                 </div>
                 <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6">
-                    <Leaderboard user_name="@user" game_name="Waffle" day={1531}/>
-                    {<Leaderboard user_name="@user" game_name="Catfishing" day={647}/>}
+                    <Leaderboard user_name="user" game_name="Waffle" day={1531}/>
+                    {<Leaderboard user_name="user" game_name="Catfishing" day={647}/>}
                 </div>
                 <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6">
-                    {<Leaderboard user_name="@user" game_name="Queens" day={892}/>}
+                    {<Leaderboard user_name="user" game_name="Queens" day={892}/>}
                 </div>
                 <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6">
                     {/*<Leaderboard />*/}

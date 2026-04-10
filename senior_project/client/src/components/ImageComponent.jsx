@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 
-function ImageComponent({folder, imageName, className = "rounded-lg"}) {
+function ImageComponent({folder, image_name, className = "rounded-lg"}) {
   const [imageSrc, setImageSrc] = useState(null);
-  //const folder = '../assets';
-  //const imageName = 'sumrall.jpg'; // Example image name
 
   useEffect(() => {
     const importImage = async () => {
       try {
-        const module = await import(/* @vite-ignore */ `${folder}${imageName}`);
+        const module = await import(/* @vite-ignore */ `../assets/profile_pictures/sumrall.jpg`);
         setImageSrc(module.default);
       } catch (error) {
         console.error('Error loading image:', error);
@@ -17,12 +15,12 @@ function ImageComponent({folder, imageName, className = "rounded-lg"}) {
     };
 
     importImage();
-  }, [imageName]);
+  }, [image_name]);
 
   return (
     <div>
       {imageSrc ? 
-        <img src={imageSrc} alt="Dynamically loaded image" className={className} /> 
+        <img src={imageSrc} className={className} /> 
         : <div>Loading image...</div>}
     </div>
   );

@@ -18,6 +18,25 @@ router.get("/", async (req, res) => {
     res.send(results).status(200);
 });
 
+
+// This section will get the results of searching the games table
+router.get("/search", async (req, res) => {
+    let collection = await db.collection("games");
+    let results = await collection.find({}).toArray();
+
+    res.send(results).status(200);   
+});
+
+// This section will get the results of searching the games table with a query
+router.get("/search/:search", async (req, res) => {
+    let collection = await db.collection("games");
+    let query = { title: {$regex: req.params.search, $options: 'i'} };
+    let results = await collection.find(query).toArray();
+
+    res.send(results).status(200);   
+});
+
+
 // This section will help you get a single game by id
 router.get("/:id", async (req, res) => {
     let collection = await db.collection("games");

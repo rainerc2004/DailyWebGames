@@ -68,6 +68,7 @@ router.get("/leaderboard/:username/:gamename/:day", async (req,res) => {
     res.send(results).status(200);
 });
 
+
 // This section will help you get a single score by id
 router.get("/:id", async (req, res) => {
     let collection = await db.collection("scores");
@@ -77,11 +78,7 @@ router.get("/:id", async (req, res) => {
     if (!result) res.send("Not found").status(404);
     else res.send(result).status(200);
 });
-
-// This section will help you get a list of scores by user_id
-
-
-// This section will help you get a list of scores by 
+ 
 
 // This section will help you create a new score.
 router.post("/", async (req, res) => {
