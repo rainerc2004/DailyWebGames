@@ -12,7 +12,7 @@ const ProfilePage = () => {
                 <div className="flex col-span-1 gap-3 px-6 pb-6">
                     <ProfilePanel user_name="user"/>
                 </div>
-                <div className="flex flex-col overflow-y-scroll col-span-3 px-6 pb-6 ">
+                <div className="flex flex-col overflow-y-scroll col-span-2 px-6 pb-6 ">
                     <div className="flex flex-col gap-6">
                         <GameHistory user_name="user" game_name="Wordle" day={1747}/>
                         <GameHistory user_name="user" game_name="Octordle" day={1528}/>
@@ -26,7 +26,9 @@ const ProfilePage = () => {
                         {/*<GameHistory />*/}
                     </div>
                 </div>
-                <FriendsPanel user_name="user"/>
+                <div className="flex col-span-2 gap-3 px-6 pb-6">
+                    <FriendsPanel user_name="user" />
+                </div>
             </div>
         </div>
     );
