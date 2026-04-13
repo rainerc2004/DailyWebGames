@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Leaderboard from "./Leaderboard";
@@ -12,6 +12,8 @@ const Record = (props) => (
 
 export default function LeaderboardPage({user_name}) {
     const [records, setRecords] = useState([]);
+    let location = useLocation();
+    user_name = location.state.user_name;
     
     // This method fetches the scores from the database based on user's friends list, game_name, and day.
     useEffect(() => {
@@ -68,21 +70,11 @@ export default function LeaderboardPage({user_name}) {
 
         return (
             <div className="grid flex flex-col flex-1 items-start justify-start grid-cols-5 px-3">
-                <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6">
-                    {map_0}
-                </div>
-                <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6">
-                    {map_1}
-                </div>
-                <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6">
-                    {map_2}
-                </div>
-                <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6">
-                    {map_3}
-                </div>
-                <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6">
-                    {map_4}
-                </div>
+                <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6"> {map_0} </div>
+                <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6"> {map_1} </div>
+                <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6"> {map_2} </div>
+                <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6"> {map_3} </div>
+                <div className="flex flex-col col-span-1 flex-end justify-end gap-6 px-3 pb-6"> {map_4} </div>
             </div>
         );
     }
