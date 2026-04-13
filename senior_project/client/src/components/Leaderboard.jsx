@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const Record = (props) => (
     <div>
-        <p>{props.index}. {props.record.user_name} - {props.record.score_str}/{props.record.denominator}</p>
+        <p>{props.index}. @{props.record.user_name} - {props.record.score_str}/{props.record.denominator}</p>
     </div>
 );
 
