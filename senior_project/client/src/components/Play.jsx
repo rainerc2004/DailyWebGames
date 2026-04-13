@@ -10,7 +10,7 @@ const updateGame = ({game}) => {
 }*/
 
 const Play = ({}) => {
-    const [game, setGame] = useState("");
+    const [game, setGame] = useState("Wordle");
     const [record, setRecord] = useState("");
     
     // This method fetches the game info from the database based on game_name
