@@ -9,6 +9,7 @@ import Play from "./components/Play";
 import LeaderboardPage from "./components/LeaderboardPage";
 import ProfilePage from "./components/ProfilePage";
 import SearchPage from "./components/SearchPage";
+import List from "./components/List";
 import "./index.css";
  
 const router = createBrowserRouter([
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
     {
         path: "search",
         element: <SearchPage />,
+        children: []
+    },
+    {
+        path: "list",
+        element: <List />,
         children: []
     }
 ]);
