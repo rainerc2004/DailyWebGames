@@ -27,6 +27,7 @@ router.get("/search", async (req, res) => {
     res.send(results).status(200);   
 });
 
+
 // This section will get the results of searching the games table with a query
 router.get("/search/:search", async (req, res) => {
     let collection = await db.collection("games");
@@ -34,6 +35,17 @@ router.get("/search/:search", async (req, res) => {
     let results = await collection.find(query).toArray();
 
     res.send(results).status(200);   
+});
+
+
+// This section will help you get a single game by game_name
+router.get("/game_name/:game_name", async (req, res) => {
+    let collection = await db.collection("games");
+    let query = { game_name: {$eq: req.params.game_name} };
+    let result = await collection.findOne(query);
+
+    if (!result) res.send("Not found").status(404);
+    else res.send(result).status(200);
 });
 
 

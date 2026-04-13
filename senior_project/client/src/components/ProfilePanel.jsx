@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export default function ProfilePanel({user_name}) {
     const [record, setRecord] = useState('');
 
-    // This method fetches the scores from the database based on user's friends list, game_name, and day.
+    // This method fetches the user's profile from the database
     useEffect(() => {
         async function getRecord() {
             const response = await fetch(`http://localhost:5050/user/profile/${user_name}`, {

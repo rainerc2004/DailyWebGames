@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 const Record = (props) => (
     <div>
@@ -45,13 +44,11 @@ export default function RecordList({user_name, game_name, day}) {
     }
 
     return (
-        <div class= "grow px-6 py-6 bg-zinc-900 text-white font-semibold rounded-lg text-left">
+        <div>
             <div className="text-xl">
-                Leaderboard
+                {game_name} - #{day}
             </div>
-            <div className="text-l py-1">
-                <i>{game_name} - #{day}</i>
-            </div>
+            <br></br>
             {recordList()}
         </div>
     );

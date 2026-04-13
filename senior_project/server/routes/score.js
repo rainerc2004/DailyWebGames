@@ -11,11 +11,52 @@ import { ObjectId } from "mongodb";
 // The router will be added as a middleware and will take control of requests starting with path /score.
 const router = express.Router();
 
+
 // This section will help you get a list of all the scores.
 router.get("/", async (req, res) => {
     let collection = await db.collection("scores");
     //let query = { user_id: { $in: ["user_id", "user_id2"]}};
     let results = await collection.find({}).toArray();
+    res.send(results).status(200);
+});
+
+
+// This section will help you get a list of Games this user or friends played today
+router.get("/gamehistory/:username/all/today", async (req,res) => {
+    // Get records of friends of user
+    let collection = await db.collection("friends");
+    let query = { user_name_1: {$eq: req.params.username}, status: {$eq: "friends"} };
+    let results = await collection.find(query).toArray();
+
+    // Create list of friends list usernames
+    let friend_names = [];
+    for(let i = 0; i < results.length; i++) {
+        friend_names.push(results[i].user_name_2);
+    }
+    friend_names.push(req.params.username);
+    
+    // Get records of all games in database sorted alphabetically
+    collection  = await db.collection("games");
+    results = await collection.find({}).sort({game_name: 1}).toArray();
+
+    // Create list of game_name and current_day
+    let today_games = []
+    for(let i = 0; i < results.length; i++) {
+        let game = [results[i].game_name, results[i].current_day];
+        today_games.push(game);
+    }
+
+    // Get records of scores
+    collection = await db.collection("scores");
+    results = [];
+    for(let i = 0; i < today_games.length; i++) {
+        query = { user_name: {$in: friend_names}, game_name: {$eq: today_games[i][0]}, day: {$eq: today_games[i][1]} };
+        let result = await collection.findOne(query);
+        if(result) {
+            results.push(result);
+        }
+    }
+
     res.send(results).status(200);
 });
 
@@ -47,7 +88,7 @@ router.get("/leaderboard/:username/:gamename/:day", async (req,res) => {
     
     // Determine sort order (1 = ascending, -1 = descending)
     collection = await db.collection("games");
-    query = { title: {$eq: req.params.gamename} };
+    query = { game_name: {$eq: req.params.gamename} };
     results = await collection.findOne(query);
     
     let sort_direction = 1;
