@@ -90,6 +90,7 @@ router.get("/leaderboard/:username/:gamename/:day", async (req,res) => {
     collection = await db.collection("games");
     query = { game_name: {$eq: req.params.gamename} };
     results = await collection.findOne(query);
+    console.log(req.params.gamename);
     
     let sort_direction = 1;
     if(results.score_goal == 'min') {

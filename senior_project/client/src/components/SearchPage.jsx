@@ -4,10 +4,7 @@ import Navbar from "./Navbar";
 import SearchResultsUser from "./SearchResultsUser";
 import SearchResultsList from "./SearchResultsList";
 import SearchResultsGame from "./SearchResultsGame";
-import ProfileCard from "./ProfileCard";
-import GameCard from "./GameCard";
-import ListCard from "./ListCard";
-import GameHistory from "./GameHistory";
+
 
 const SearchPage = () => {
     const urlParams = new URLSearchParams(window.location.search);
