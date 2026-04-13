@@ -1,5 +1,4 @@
 import { useState } from "react";
-import ImageComponent from "./ImageComponent";
 import ProfileCard from "./ProfileCard";
 
 export default function FriendsPanel() {
@@ -43,7 +42,7 @@ export default function FriendsPanel() {
             </div>
 
 
-            <div class="">
+            <div class="">                
                 <ProfileCard user_name={"Sumrall Gaming"} />
                 <ProfileCard user_name={"Sumrall Gaming"} />
                 <ProfileCard user_name={"Sumrall Gaming"} />

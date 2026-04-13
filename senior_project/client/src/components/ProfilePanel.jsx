@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ImageComponent from "./ImageComponent";
 
 export default function ProfilePanel({user_name}) {
     const [record, setRecord] = useState('');
@@ -32,10 +31,11 @@ export default function ProfilePanel({user_name}) {
                 {record.display_name}
             </div>
             <div className="text-x2">
-                {user_name}
+                @{user_name}
             </div>
             <div className="py-6">
-                <ImageComponent folder="../assets/profile_pictures/" image_name={record.profile_image} className="rounded-lg"/>
+                <img src={"/profile_pictures/".concat(record.profile_image)} className="rounded-lg"/>
+                {/*UNUSED: <ImageComponent folder="../assets/profile_pictures/" image_name={record.profile_image} className="rounded-lg"/>*/}
             </div>
             <div>
                 <p>{record.description}</p>

@@ -4,7 +4,7 @@ import ProfileCard from "./ProfileCard";
 
 const Record = (props) => (
     <div className="flex flex-col gap-6">
-        <ProfileCard user_name={props.record.user_name} display_name={props.record.display_name} image_name="default.jpg"/>
+        <ProfileCard user_name={props.record.user_name} display_name={props.record.display_name} image_name={props.record.profile_image}/>
     </div>
 );
 
