@@ -1,7 +1,11 @@
 import { useState } from "react";
 
 export default function Login() {
-    const [query, setQuery] = useState("");
+    const [login_username, setLoginUsername] = useState("");
+    const [login_password, setLoginPassword] = useState("");
+    const [signup_username, setSignupUsername] = useState("");
+    const [signup_password, setSignupPassword] = useState("");
+    const [signup_confirm, setSignupConfirm] = useState("");
 
     const handleLogin = () => {
         //handle login
@@ -17,15 +21,15 @@ export default function Login() {
                 Log in
                 <input
                     type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    value={login_username}
+                    onChange={(e) => setLoginUsername(e.target.value)}
                     placeholder="Username"
                     className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
                 />
                 <input
                     type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    value={login_password}
+                    onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="Password"
                     className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
                 />
@@ -40,22 +44,22 @@ export default function Login() {
                 Sign up
                 <input
                     type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    value={signup_username}
+                    onChange={(e) => setSignupUsername(e.target.value)}
                     placeholder="Enter username"
                     className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
                 />
                 <input
                     type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    value={signup_password}
+                    onChange={(e) => setSignupPassword(e.target.value)}
                     placeholder="Enter password"
                     className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
                 />
                 <input
                     type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    value={signup_confirm}
+                    onChange={(e) => setSignupConfirm(e.target.value)}
                     placeholder="Confirm password"
                     className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
                 />
