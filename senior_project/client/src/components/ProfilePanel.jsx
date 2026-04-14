@@ -5,6 +5,10 @@ import { NavLink } from "react-router-dom";
 export default function ProfilePanel({user_name}) {
     const [record, setRecord] = useState('');
 
+    const handleSignout = () => {
+        //handle signout
+    };
+
     // This method fetches the user's profile from the database
     useEffect(() => {
         async function getRecord() {
@@ -43,9 +47,14 @@ export default function ProfilePanel({user_name}) {
                 <p>{record.description}</p>
             </div>
             </div>
+            <div class="flex flex-col gap-2">
             <NavLink to="/profile/edit" className="px-6 py-2 w-full bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                 Edit your profile
             </NavLink>
+            <button onClick={handleSignout} class="px-6 py-2 w-full bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                Sign out
+                </button>
+            </div>
         </div>
     );
 }
