@@ -10,6 +10,7 @@ import LeaderboardPage from "./components/LeaderboardPage";
 import ProfilePage from "./components/ProfilePage";
 import SearchPage from "./components/SearchPage";
 import List from "./components/List";
+import Login from "./components/Login";
 import "./index.css";
  
 const router = createBrowserRouter([
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
     {
         path: "list",
         element: <List />,
+        children: []
+    },
+    {
+        path: "login",
+        element: <Login />,
         children: []
     }
 ]);
