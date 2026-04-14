@@ -26,6 +26,8 @@ export default function Login() {
         setLoginMessage("Logging in!");
         window.location.href = "/home";
         current_user = username;
+
+        // Swap to homepage?
     };
 
     async function handleSignup(username, password, confirm) {
@@ -56,6 +58,8 @@ export default function Login() {
         setSignupMessage("Account created!");
         window.location.href = "/home";
         current_user = username;
+
+        // Swap to homepage?
     };
 
     return (
