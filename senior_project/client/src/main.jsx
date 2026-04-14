@@ -15,7 +15,7 @@ import "./index.css";
  
 const router = createBrowserRouter([
    {
-       path: "/",
+       path: "home",
        element: <App />,
        children: []
    },
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
         children: []
     },
     {
-        path: "login",
+        path: "/",
         element: <Login />,
         children: []
     }
