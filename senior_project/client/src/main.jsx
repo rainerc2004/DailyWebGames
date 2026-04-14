@@ -13,6 +13,8 @@ import List from "./components/List";
 import Login from "./components/Login";
 import EditProfile from "./components/EditProfile";
 import EditList from "./components/EditList";
+import CreateList from "./components/CreateList";
+import MyLists from "./components/MyLists";
 import "./index.css";
  
 const router = createBrowserRouter([
@@ -59,6 +61,16 @@ const router = createBrowserRouter([
     {
         path: "list/edit",
         element: <EditList />,
+        children: []
+    },
+    {
+        path: "mylists",
+        element: <MyLists />,
+        children: []
+    },
+    {
+        path: "mylists/create",
+        element: <CreateList />,
         children: []
     },
 ]);
