@@ -25,6 +25,8 @@ export default function Login() {
         }
         setLoginMessage("Logging in!");
         current_user = username;
+
+        // Swap to homepage?
     };
 
     async function handleSignup(username, password, confirm) {
@@ -54,6 +56,8 @@ export default function Login() {
         }
         setSignupMessage("Account created!");
         current_user = username;
+
+        // Swap to homepage?
     };
 
     return (
