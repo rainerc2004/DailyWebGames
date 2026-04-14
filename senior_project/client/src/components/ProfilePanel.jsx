@@ -33,7 +33,7 @@ export default function ProfilePanel({user_name}) {
 
     return (
         <div class="grow flex flex-col justify-between px-6 py-6 bg-zinc-900 text-white font-semibold rounded-lg text-left">
-            <div>
+            <div class="flex flex-col gap-2">
             <div className="text-xl">
                 {record.display_name}
             </div>
@@ -51,7 +51,7 @@ export default function ProfilePanel({user_name}) {
             <NavLink to="/profile/edit" className="px-6 py-2 w-full bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                 Edit your profile
             </NavLink>
-            <button onClick={handleSignout} class="px-6 py-2 w-full bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                <button onClick={handleSignout} class="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                 Sign out
                 </button>
             </div>
