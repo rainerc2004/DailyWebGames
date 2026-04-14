@@ -51,7 +51,7 @@ export default function FriendListPending({user_name, profile_user}) {
             </div>
             <FriendStubPending user_name="this_user" />
             
-            {recordList()}
+            {/*{recordList()}*/}
         </div>
     );
 }
