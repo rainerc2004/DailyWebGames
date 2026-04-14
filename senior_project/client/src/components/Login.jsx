@@ -24,6 +24,7 @@ export default function Login() {
             return;
         }
         setLoginMessage("Logging in!");
+        window.location.href = "/home";
         current_user = username;
     };
 
@@ -53,6 +54,7 @@ export default function Login() {
             return;
         }
         setSignupMessage("Account created!");
+        window.location.href = "/home";
         current_user = username;
     };
 
