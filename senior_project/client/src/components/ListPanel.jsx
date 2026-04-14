@@ -3,13 +3,13 @@ import { NavLink } from "react-router-dom";
 import playlist_name from "./ListCard";
 
 export default function ListPanel({ user_name, list_name, owner_user_name }) {
-    const [owner, setOwner] = useState('');
+    const [list_info, setListInfo] = useState('');
     const editLink = "/list/edit/?list=".concat(list_name);
 
-    // This method fetches the user's profile from the database
+    // This method fetches the list's profile from the database
     useEffect(() => {
-        async function getOwner() {
-            const response = await fetch(`http://localhost:5050/user/profile/${owner_user_name}`, {
+        async function getListInfo() {
+            const response = await fetch(`http://localhost:5050/playlist/listname/${list_name}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -20,10 +20,10 @@ export default function ListPanel({ user_name, list_name, owner_user_name }) {
                 console.error(message);
                 return;
             }
-            const owner = await response.json();
-            setOwner(owner);
+            const list_info = await response.json();
+            setListInfo(list_info);
         }
-        getOwner();
+        getListInfo();
         return;
     })
 
@@ -33,6 +33,17 @@ export default function ListPanel({ user_name, list_name, owner_user_name }) {
         });
     }
 
+    function renderButtons(username, ownername) {
+        if(username == ownername) {
+            return (
+                <NavLink to={editLink} className="px-6 py-2 w-full bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                    Edit this list
+                </NavLink>
+            );
+        }
+        return;        
+    }
+
     return (
         <div class="grow flex flex-col justify-between px-6 py-6 bg-zinc-900 text-white font-semibold rounded-lg text-left">
             <div class="flex flex-col gap-2">
@@ -40,20 +51,19 @@ export default function ListPanel({ user_name, list_name, owner_user_name }) {
                 {list_name}
             </div>
             <div className="text-x2">
-                Created by @{owner.user_name}
+                Created by @{list_info.owner_user_name}
             </div>
+            <br></br>
             <div>
-                LIST DESCRIPTION!
-            </div>
+                <br></br>
+                {list_info.description}</div>
             </div>
             <div class="flex flex-col gap-2">
-                <NavLink to={editLink} className="px-6 py-2 w-full bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
-                    Edit this list
-                </NavLink>
+                {renderButtons(user_name, list_info.owner_user_name)}
                 <button
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center"
                 onClick={() => setList(user_name, list_name)} >
-                Make this my default list!
+                    Make this my default list!
                 </button>
             </div>
         </div>
