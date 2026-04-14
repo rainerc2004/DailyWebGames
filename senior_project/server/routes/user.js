@@ -6,10 +6,16 @@ import db from "../db/connection.js";
 // This help convert the id from string to ObjectId for the _id.
 import { ObjectId } from "mongodb";
 
+import bcrypt from "bcrypt";
+
 // router is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /user.
 const router = express.Router();
+
+// bcrypt is used to perform password encryption
+const salt = await bcrypt.genSalt(10);
+
 
 // This section will help you get a list of all the users.
 router.get("/", async (req, res) => {
@@ -28,6 +34,29 @@ router.get("/profile/:username", async (req, res) => {
 
     if (!result) res.send("Not found").status(404);
     else res.send(result).status(200);
+});
+
+
+// This section will help you log in using a username and password
+router.get("/login/:username/:password", async (req, res) => {
+    try {
+        let collection = await db.collection("users");
+        let query = { username: {$eq: req.params.username} };
+        let exists = await collection.findOne(query);
+        if (!exists) {
+            res.status(500).send("Username doesn't exist");
+            return;
+        }
+        const match = await bcrypt.compare(req.params.password, exists.password);
+        if (!match) {
+            res.status(500).send("Incorrect password");
+            return;
+        }
+        res.send().status(200);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error adding user");
+    }
 });
 
 
@@ -58,6 +87,40 @@ router.get("/:id", async (req, res) => {
     if (!result) res.send("Not found").status(404);
     else res.send(result).status(200);
 });
+
+
+// This section will help you sign up a new user.
+router.post("/sign_up/:username/:password", async (req, res) => {
+    try {
+        console.log("test");
+        let collection = await db.collection("users");
+        let query = { username: {$eq: req.params.username} };
+        let exists = await collection.findOne(query);
+        if (exists) {
+            res.status(500).send("Username already exists!");
+            return;
+        }
+        console.log(exists);
+
+        const hash = await bcrypt.hash(req.params.password, salt);
+
+        let newDocument = {
+            username: req.params.username,
+            password: hash,
+            display_name: req.params.username,
+            profile_image: "default.jpg",
+            description: "",
+            main_list: ""
+        };
+        console.log(newDocument);
+        let result = await collection.insertOne(newDocument);
+        res.send(result).status(204);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error adding user");
+    }
+});
+
 
 // This section will help you create a new user.
 router.post("/", async (req, res) => {

@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const current_user = "";
+
 export default function Login() {
     const [login_username, setLoginUsername] = useState("");
     const [login_password, setLoginPassword] = useState("");
@@ -7,12 +9,51 @@ export default function Login() {
     const [signup_password, setSignupPassword] = useState("");
     const [signup_confirm, setSignupConfirm] = useState("");
 
-    const handleLogin = () => {
-        //handle login
+    const [login_message, setLoginMessage] = useState("");
+    const [signup_message, setSignupMessage] = useState("");
+
+
+    async function handleLogin(username, password) {
+        const response = await fetch(`http://localhost:5050/user/login/${username}/${password}`, {
+            method: 'GET'
+        });
+        if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            console.error(message);
+            setLoginMessage("Username or password is incorrect!");
+            return;
+        }
+        setLoginMessage("Logging in!");
+        current_user = username;
     };
 
-    const handleSignup = () => {
-        //handle signup
+    async function handleSignup(username, password, confirm) {
+        if(username == "" || password == "" || confirm == "") { 
+            return; 
+        }
+        if(password != confirm) {
+            setSignupMessage("Passwords don't match!");
+            return;
+        }
+        if(username.length > 32) {
+            setSignupMessage("Username can't be more than 32 characters!");
+            return;
+        }
+        if(password.length < 8 || password.length > 32) {
+            setSignupMessage("Password must be between 8 and 32 characters!");
+            return;
+        }
+        const response = await fetch(`http://localhost:5050/user/sign_up/${username}/${password}`, {
+            method: 'POST'
+        });
+        if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            console.error(message);
+            setSignupMessage("Username already exists!");
+            return;
+        }
+        setSignupMessage("Account created!");
+        current_user = username;
     };
 
     return (
@@ -34,11 +75,12 @@ export default function Login() {
                     className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
                 />
                 <button
-                    onClick={handleLogin}
+                    onClick={function() {handleLogin(login_username, login_password)}}
                     className="w-1/2 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center"
                 >
                     Log in!
                 </button>
+                {login_message}
             </div>
             <div className="flex flex-col gap-3 items-center">
                 Sign up
@@ -64,11 +106,12 @@ export default function Login() {
                     className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
                 />
                 <button
-                    onClick={handleSignup}
+                    onClick={function() {handleSignup(signup_username, signup_password, signup_confirm)}}
                     className="w-1/2 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center"
                 >
                     Sign up!
                 </button>
+                {signup_message}
             </div>
         </div>
     );

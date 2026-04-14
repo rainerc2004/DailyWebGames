@@ -24,7 +24,6 @@ router.get("/elements/:listname", async (req, res) => {
     let collection = await db.collection("playlist_elements");
     let query = { list_name: {$eq: req.params.listname} };
     let results = await collection.find(query).sort({list_index: 1}).toArray();
-    console.log(results);
 
     if (!results) res.send("Not found").status(404);
     else res.send(results).status(200);
