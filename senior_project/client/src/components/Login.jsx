@@ -1,8 +1,9 @@
 import { useState } from "react";
-
-const current_user = "";
+//import { useAuth } from "../contexts/AuthContext";
 
 export default function Login() {
+    //const { login } = useAuth();
+
     const [login_username, setLoginUsername] = useState("");
     const [login_password, setLoginPassword] = useState("");
     const [signup_username, setSignupUsername] = useState("");
@@ -25,9 +26,7 @@ export default function Login() {
         }
         setLoginMessage("Logging in!");
         window.location.href = "/home";
-        current_user = username;
-
-        // Swap to homepage?
+        //login({ name: "user" });
     };
 
     async function handleSignup(username, password, confirm) {
@@ -57,9 +56,7 @@ export default function Login() {
         }
         setSignupMessage("Account created!");
         window.location.href = "/home";
-        current_user = username;
-
-        // Swap to homepage?
+        //login({ name: "user" });
     };
 
     return (

@@ -41,7 +41,7 @@ router.get("/profile/:username", async (req, res) => {
 router.get("/login/:username/:password", async (req, res) => {
     try {
         let collection = await db.collection("users");
-        let query = { username: {$eq: req.params.username} };
+        let query = { user_name: {$eq: req.params.username} };
         let exists = await collection.findOne(query);
         if (!exists) {
             res.status(500).send("Username doesn't exist");
@@ -94,7 +94,7 @@ router.post("/sign_up/:username/:password", async (req, res) => {
     try {
         console.log("test");
         let collection = await db.collection("users");
-        let query = { username: {$eq: req.params.username} };
+        let query = { user_name: {$eq: req.params.username} };
         let exists = await collection.findOne(query);
         if (exists) {
             res.status(500).send("Username already exists!");
@@ -105,7 +105,7 @@ router.post("/sign_up/:username/:password", async (req, res) => {
         const hash = await bcrypt.hash(req.params.password, salt);
 
         let newDocument = {
-            username: req.params.username,
+            user_name: req.params.username,
             password: hash,
             display_name: req.params.username,
             profile_image: "default.jpg",

@@ -1,14 +1,21 @@
-import { useState } from "react";
-import ProfileCard from "./ProfileCard";
-import GameHistory from "./GameHistory";
-import FriendStub from "./FriendStub";
-import FriendStubPending from "./FriendStubPending";
+import { useEffect, useState } from "react";
+import FriendListAdded from "./FriendListAdded";
+import FriendListPending from "./FriendListPending";
 
-export default function FriendsPanel() {
+
+export default function FriendsPanel({user_name, profile_user}) {
     const [query, setQuery] = useState("");
 
-    const addFriend = () => {
-        //Friend adding here.
+    
+    async function addFriend (user_name_1, user_name_2) {
+        const response = await fetch(`http://localhost:5050/friend/add/${user_name_1}/${user_name_2}/pending`, {
+            method: 'POST'
+        });
+        if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            console.error(message);
+            return;
+        }
     };
 
     const handleEnter = (event) => {
@@ -33,7 +40,7 @@ export default function FriendsPanel() {
                         className="px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg"
                     />
                     <button
-                        onClick={addFriend}
+                        onClick={function() {addFriend(user_name, query)}}
                         className="px-2 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center"
                     >
                         +
@@ -42,40 +49,13 @@ export default function FriendsPanel() {
             </div>
             <div class="row-span-6 grid flex flex-1 grid-cols-2 gap-6">
                 <div class="flex flex-col col-span-1 max-h-[525px] overflow-y-scroll gap-2">
-                    <div class="sticky top-0 w-full px-6 py-2 bg-zinc-700 text-white font-semibold">
-                        Incoming requests
-                    </div>
-                    <FriendStubPending user_name="this_user" />
-                    <FriendStubPending user_name="this_user" />
-                    <FriendStubPending user_name="this_user" />
-                    <FriendStubPending user_name="this_user" />
-                    <FriendStubPending user_name="this_user" />
+                    <FriendListPending user_name="user" profile_user="user" />
                  
                 </div>
                 <div class="flex flex-col col-span-1 max-h-[525px] overflow-y-scroll gap-2">
-                    <div class="sticky top-0 w-full px-6 py-2 bg-zinc-700 text-white font-semibold">
-                        Current friends
-                    </div>
-                    <FriendStub user_name="this_user" />
-                    <FriendStub user_name="this_user" />
-                    <FriendStub user_name="this_user" />
-                    <FriendStub user_name="this_user" />
-                    <FriendStub user_name="this_user" />
-                    <FriendStub user_name="this_user" />
-                    <FriendStub user_name="this_user" />
-                    <FriendStub user_name="this_user" />
-                    <FriendStub user_name="this_user" />
-                    <FriendStub user_name="this_user" />
-                    <FriendStub user_name="this_user" />
-                    <FriendStub user_name="this_user" />
-
-
+                    <FriendListAdded user_name="user" profile_user="user" />
                 </div>
             </div>
-
-
-
-            </div>
-
+        </div>
     );
 }

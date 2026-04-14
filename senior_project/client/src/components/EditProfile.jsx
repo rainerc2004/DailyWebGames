@@ -2,7 +2,7 @@ import { useState } from "react";
 import Navbar from "./Navbar";
 
 
-export default function EditProfile({current_username="test"}) {
+export default function EditProfile({current_username="user"}) {
     const [username, setUsername] = useState("");
     const [displayname, setDisplayname] = useState("");
     const [bio, setBio] = useState("");
@@ -23,13 +23,6 @@ export default function EditProfile({current_username="test"}) {
                     value={displayname}
                     onChange={(e) => setDisplayname(e.target.value)}
                     placeholder="Set a new display name"
-                    className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
-                />
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Set a new username"
                     className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
                 />
                 <textarea

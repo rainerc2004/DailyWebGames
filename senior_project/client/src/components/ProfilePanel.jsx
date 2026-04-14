@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 
-export default function ProfilePanel({user_name}) {
+export default function ProfilePanel({user_name, profile_user}) {
+    //const [profile_user, setProfileUser] = useState('');
     const [record, setRecord] = useState('');
 
     const handleSignout = () => {
         //handle signout
+        window.location.href = "/";
     };
 
     // This method fetches the user's profile from the database
@@ -51,7 +53,7 @@ export default function ProfilePanel({user_name}) {
             <NavLink to="/profile/edit" className="px-6 py-2 w-full bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                 Edit your profile
             </NavLink>
-                <button onClick={handleSignout} class="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                <button onClick={function() {handleSignout()}} class="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                 Sign out
                 </button>
             </div>
