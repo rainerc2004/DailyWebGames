@@ -50,9 +50,9 @@ export default function FriendListAdded({user_name, profile_user}) {
             </div>
             <FriendStub user_name="jane_doe" />
             <FriendStub user_name="john_doe" />
-            <FriendStub user_name="mark" />
-            <FriendStub user_name="sarah_b" />
-            <FriendStub user_name="tom2" />
+            <FriendStub user_name="mark_101" />
+            <FriendStub user_name="sally_b_4" />
+            <FriendStub user_name="tom2847" />
 
            {/*{recordList()}*/}
         </div>

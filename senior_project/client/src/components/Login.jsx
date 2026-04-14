@@ -37,8 +37,8 @@ export default function Login() {
             setSignupMessage("Passwords don't match!");
             return;
         }
-        if(username.length > 32) {
-            setSignupMessage("Username can't be more than 32 characters!");
+        if(username.length > 10) {
+            setSignupMessage("Username can't be more than 10 characters!");
             return;
         }
         if(password.length < 8 || password.length > 32) {
