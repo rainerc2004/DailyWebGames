@@ -32,7 +32,7 @@ export default function ProfilePanel({user_name}) {
 
 
     return (
-        <div class="grow flex flex-col justify-between px-6 py-6 bg-zinc-900 text-white font-semibold rounded-lg text-left">
+        <div class="grow flex flex-col px-6 py-6 gap-6 bg-zinc-900 text-white font-semibold rounded-lg text-left">
             <div class="flex flex-col gap-2">
             <div className="text-xl">
                 {record.display_name}
