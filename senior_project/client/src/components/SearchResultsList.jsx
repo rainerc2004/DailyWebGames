@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ListCard from "./ListCard";
 
+
 const Record = (props) => (
     <div className="flex flex-col gap-6">
-        <ListCard title={props.record.title}/>
+        <ListCard list_name={props.record.list_name} owner_user_name={props.record.owner_user_name}/>
     </div>
 );
 

@@ -12,7 +12,7 @@ const List = () => {
             <Navbar />
             <div className="grid flex flex-1 overflow-hidden grid-cols-5 px-3">
                 <div className="flex col-span-1 gap-3 px-6 pb-6">
-                    <ListPanel user_name="user" />
+                    <ListPanel user_name="user" list_name={list_name}/>
                 </div>
                 <div className="flex flex-col overflow-y-scroll col-span-3 px-6 pb-6 ">
                     <div className="flex flex-col gap-6">

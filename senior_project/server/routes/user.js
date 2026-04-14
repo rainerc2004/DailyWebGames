@@ -77,6 +77,26 @@ router.post("/", async (req, res) => {
     }
 });
 
+// This section will help you update a user's main_list by username.
+router.patch("/setlist/:listname/:username", async (req, res) => {
+    try {
+        const query = { user_name: {$eq: req.params.username} };
+        const updates = {
+            $set: {
+                main_list: req.params.listname
+            },
+        };
+
+        let collection = await db.collection("users");
+        let result = await collection.updateOne(query, updates);
+
+        res.send(result).status(200);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error updating user");
+    }
+});
+
 // This section will help you update a user by id.
 router.patch("/:id", async (req, res) => {
     try {

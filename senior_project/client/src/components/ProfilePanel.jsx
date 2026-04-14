@@ -31,11 +31,10 @@ export default function ProfilePanel({user_name}) {
                 {record.display_name}
             </div>
             <div className="text-x2">
-                @{user_name}
+                @{record.user_name}
             </div>
             <div className="py-6">
                 <img src={"/profile_pictures/".concat(record.profile_image)} className="rounded-lg"/>
-                {/*UNUSED: <ImageComponent folder="../assets/profile_pictures/" image_name={record.profile_image} className="rounded-lg"/>*/}
             </div>
             <div>
                 <p>{record.description}</p>

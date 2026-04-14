@@ -19,6 +19,18 @@ router.get("/", async (req, res) => {
 });
 
 
+// This section will help you get a single user by user_name
+router.get("/listname/:listname", async (req, res) => {
+    let collection = await db.collection("users");
+    let query = { user_name: {$eq: req.params.username} };
+    let result = await collection.findOne(query);
+    //console.log(result);
+
+    if (!result) res.send("Not found").status(404);
+    else res.send(result).status(200);
+});
+
+
 // This section will get the results of searching the playlists table
 router.get("/search", async (req, res) => {
     let collection = await db.collection("playlists");
@@ -30,7 +42,7 @@ router.get("/search", async (req, res) => {
 // This section will get the results of searching the playlists table with a query
 router.get("/search/:search", async (req, res) => {
     let collection = await db.collection("playlists");
-    let query = { title: {$regex: req.params.search, $options: 'i'} };
+    let query = { list_name: {$regex: req.params.search, $options: 'i'} };
     let results = await collection.find(query).toArray();
 
     res.send(results).status(200);   

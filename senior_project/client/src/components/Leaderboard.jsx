@@ -49,7 +49,6 @@ export default function RecordList({user_name, game_name, day}) {
                 {game_name} - #{day} 
             </div>
             <br></br>
-            {user_name} {game_name} {day}
             {recordList()}
         </div>
     );
