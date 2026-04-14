@@ -38,7 +38,7 @@ const Play = ({}) => {
     return (
         <div className="flex flex-col h-screen">
             <PlayNavbar updateGame={setGame} />
-            <div className="grid flex-1 grid-cols-5">
+            <div className="grid flex-1">
                 <iframe
                     className="col-span-4"
                     border="none"
@@ -47,21 +47,6 @@ const Play = ({}) => {
                     allow="clipboard-write; picture-in-picture full"
                     src={record.game_link}>
                 </iframe>
-
-                <div className="flex flex-col col-span-1 flex-end justify-end gap-3 px-6 pb-6">
-                    <div class= "grow px-6 py-6 bg-zinc-900 text-white font-semibold rounded-lg text-left">
-                        <div className="text-xl">
-                            Leaderboard
-                        </div>
-                        <Leaderboard user_name="user" game_name={record.game_name} day={record.current_day}/>
-                    </div>
-                    <button className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
-                        Paste Score!
-                    </button>
-                    <button className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
-                        Next Game!
-                    </button>
-                </div>
             </div>
 
         </div>
