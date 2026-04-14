@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+
 
 export default function ProfilePanel({user_name}) {
     const [record, setRecord] = useState('');
@@ -26,7 +28,8 @@ export default function ProfilePanel({user_name}) {
 
 
     return (
-        <div class="grow px-6 py-6 bg-zinc-900 text-white font-semibold rounded-lg text-left">
+        <div class="grow flex flex-col justify-between px-6 py-6 bg-zinc-900 text-white font-semibold rounded-lg text-left">
+            <div>
             <div className="text-xl">
                 {record.display_name}
             </div>
@@ -39,6 +42,10 @@ export default function ProfilePanel({user_name}) {
             <div>
                 <p>{record.description}</p>
             </div>
+            </div>
+            <NavLink to="/profile/edit" className="px-6 py-2 w-full bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                Edit your profile
+            </NavLink>
         </div>
     );
 }

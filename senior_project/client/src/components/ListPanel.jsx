@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import playlist_name from "./ListCard";
 
 export default function ListPanel({ user_name, list_name, owner_user_name }) {
     const [owner, setOwner] = useState('');
+    const editLink = "/list/edit/?list=".concat(list_name);
 
     // This method fetches the user's profile from the database
     useEffect(() => {
@@ -32,25 +34,27 @@ export default function ListPanel({ user_name, list_name, owner_user_name }) {
     }
 
     return (
-        <div class="grow px-6 py-6 bg-zinc-900 text-white font-semibold rounded-lg text-left">
-            <button 
-                className="mt-auto px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center"
-                onClick={() => setList(user_name, list_name)} >
-                Make this my default list!
-            </button>
-            <br></br>
-            <br></br>
+        <div class="grow flex flex-col justify-between px-6 py-6 bg-zinc-900 text-white font-semibold rounded-lg text-left">
+            <div class="flex flex-col gap-2">
             <div className="text-xl">
-                {owner.display_name}
+                {list_name}
             </div>
             <div className="text-x2">
-                @{owner.user_name}
-            </div>
-            <div className="py-6">
-                <img src={"/profile_pictures/".concat(owner.profile_image)} className="rounded-lg"/>
+                Created by @{owner.user_name}
             </div>
             <div>
-                <p>{owner.description}</p>
+                LIST DESCRIPTION!
+            </div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <NavLink to={editLink} className="px-6 py-2 w-full bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                    Edit this list
+                </NavLink>
+                <button
+                className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center"
+                onClick={() => setList(user_name, list_name)} >
+                Make this my default list!
+                </button>
             </div>
         </div>
     );

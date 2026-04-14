@@ -11,6 +11,8 @@ import ProfilePage from "./components/ProfilePage";
 import SearchPage from "./components/SearchPage";
 import List from "./components/List";
 import Login from "./components/Login";
+import EditProfile from "./components/EditProfile";
+import EditList from "./components/EditList";
 import "./index.css";
  
 const router = createBrowserRouter([
@@ -48,7 +50,17 @@ const router = createBrowserRouter([
         path: "/",
         element: <Login />,
         children: []
-    }
+    },
+    {
+        path: "profile/edit",
+        element: <EditProfile />,
+        children: []
+    },
+    {
+        path: "list/edit",
+        element: <EditList />,
+        children: []
+    },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
