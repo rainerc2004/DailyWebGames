@@ -19,15 +19,26 @@ router.get("/", async (req, res) => {
 });
 
 
-// This section will help you get a single user by user_name
-router.get("/listname/:listname", async (req, res) => {
-    let collection = await db.collection("users");
-    let query = { user_name: {$eq: req.params.username} };
-    let result = await collection.findOne(query);
-    //console.log(result);
+// This section will help you get a list of playlist_elements from a given list_name
+router.get("/elements/:listname", async (req, res) => {
+    let collection = await db.collection("playlist_elements");
+    let query = { list_name: {$eq: req.params.listname} };
+    let results = await collection.find(query).sort({list_index: 1}).toArray();
+    console.log(results);
 
-    if (!result) res.send("Not found").status(404);
-    else res.send(result).status(200);
+    if (!results) res.send("Not found").status(404);
+    else res.send(results).status(200);
+});
+
+
+// This section will help you get a single list by list_name
+router.get("/listname/:listname", async (req, res) => {
+    let collection = await db.collection("playlists");
+    let query = { list_name: {$eq: req.params.listname} };
+    let results = await collection.findOne(query);
+    console.log(result);
+
+    res.send(results).status(200);
 });
 
 

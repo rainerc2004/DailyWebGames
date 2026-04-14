@@ -4,7 +4,7 @@ import GameCard from "./GameCard";
 
 const Record = (props) => (
     <div className="flex flex-col gap-6">
-        <GameCard title={props.record.game_name} game_link={props.record.game_link}/>
+        <GameCard game_name={props.record.game_name} game_link={props.record.game_link}/>
     </div>
 );
 

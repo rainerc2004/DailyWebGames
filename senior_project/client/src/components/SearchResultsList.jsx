@@ -12,7 +12,7 @@ const Record = (props) => (
 export default function RecordList({search}) {
     const [records, setRecords] = useState([]);
     
-    // This method fetches the scores from the database based on user's friends list, game_name, and day.
+    // This method fetches the search results from the Playlists table
     useEffect(() => {
         async function getRecords() {
             const response = await fetch(`http://localhost:5050/playlist/search/${search}`, {
