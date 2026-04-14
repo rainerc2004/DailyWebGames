@@ -5,8 +5,12 @@ import SearchBar from "./SearchBar";
 export default function PlayNavbar({ updateGame }) {
     const [score, setScore] = useState("");
 
-    const handleScore = () => {
-        //score sending handling
+    function handleScore() {
+        /*
+        const response = fetch(`http://localhost:5050/user/update/user/TestGame/day/${score}`, {
+            method: 'PATCH'
+        });*/
+        return;
     };
 
     return (
@@ -17,19 +21,34 @@ export default function PlayNavbar({ updateGame }) {
                     </NavLink>
                     <div class="flex grow overflow-x-auto px-3 py-6 gap-3 bg-zinc-900">
                     <button
-                        onClick={() => updateGame("Wordle")}
+                        onClick={function() { updateGame("Wordle")}}
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                         Wordle
                     </button>
                     <button
-                        onClick={() => updateGame("Octordle")}
+                        onClick={function() { updateGame("Octordle")}}
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                         Octordle
+                    </button>
+                    <button
+                        onClick={() => updateGame("Metazooa")}
+                        className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                        Metazooa
+                    </button>
+                    <button
+                        onClick={() => updateGame("Angle")}
+                        className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                        Angle
                     </button>
                     <button
                         onClick={() => updateGame("Waffle")}
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                         Waffle
+                    </button>
+                    <button
+                        onClick={() => updateGame("Linixicon")}
+                        className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                        Linixicon
                     </button>
                     <button
                         onClick={() => updateGame("Catfishing")}
@@ -41,26 +60,6 @@ export default function PlayNavbar({ updateGame }) {
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                         Queens
                     </button>
-                    <button
-                        onClick={() => updateGame("Wordle")}
-                        className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
-                        Wordle
-                    </button>
-                    <button
-                        onClick={() => updateGame("Wordle")}
-                        className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
-                        Wordle
-                    </button>
-                    <button
-                        onClick={() => updateGame("Wordle")}
-                        className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
-                        Wordle
-                    </button>
-                    <button
-                        onClick={() => updateGame("Wordle")}
-                        className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
-                        Wordle
-                    </button>
                     </div>
                 <div class="flex flex-none gap-3">
                     <input
@@ -70,7 +69,7 @@ export default function PlayNavbar({ updateGame }) {
                         placeholder="Enter score."
                         className="w-36 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
                     />
-                    <button onClick={handleScore} className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                    <button onClick={function() {handleScore()}} className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                         Paste Score!
                     </button>
                     <button className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">

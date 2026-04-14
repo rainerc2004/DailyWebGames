@@ -90,7 +90,7 @@ router.get("/leaderboard/:username/:gamename/:day", async (req,res) => {
     collection = await db.collection("games");
     query = { game_name: {$eq: req.params.gamename} };
     results = await collection.findOne(query);
-    console.log(req.params.gamename);
+    //console.log(req.params.gamename);
     
     let sort_direction = 1;
     if(results.score_goal == 'min') {
@@ -139,6 +139,49 @@ router.post("/", async (req, res) => {
         res.status(500).send("Error adding score");
     }
 });
+
+
+// This section will help you update a score by user_name and game_name.
+router.patch("/update/:username/:gamename/day/:scorestr", async (req, res) => {
+    try {
+        console.log(req.params.scorestr);
+        let collection = await db.collection("games");
+        let query = { game_name: {$eq: req.params.gamename} };
+        let result = await collection.findOne(query);
+        let current_day = result.current_day;
+
+        let scoreint = 0;
+        if(req.params.scorestr == "X") {
+            if(result.score_goal == "min") {
+                scoreint = 99999;
+            } else if(result.score_goal == "max") {
+                scoreint = -1;
+            }
+        } else {
+            scoreint = Number(scorestr);
+        }
+        console.log(scoreint);
+
+        collection = await db.collection("scores");
+        query = { 
+            user_name: {$eq: req.params.username}, 
+            game_name: {$eq: req.params.gamename},
+            day: {$eq: current_day} 
+        };
+        updates = {
+            $set: {
+                score_str: req.params.scorestr,
+                score_int: scoreint
+            },
+        };
+        result = await collection.updateOne(query, updates);
+        res.send(result).status(200);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error updating score");
+    }
+});
+
 
 // This section will help you update a score by id.
 router.patch("/:id", async (req, res) => {

@@ -9,9 +9,11 @@ export default function HomePage() {
             <NavLink to="/leaderboards" state={{user_name: "user"}} className="w-[36rem] px-6 py-3 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                 See my friends' scores!
             </NavLink>
+            {/*
             <NavLink to="/mylists" state={{ user_name: "user" }} className="w-[18rem] px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                 See my own lists!
             </NavLink>
+            */}
         </div>
 
     );

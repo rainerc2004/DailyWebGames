@@ -19,9 +19,9 @@ const ProfilePage = () => {
                         <GameHistory user_name="user" profile_user="user" game_name="Waffle" day={1531}/>
                         <GameHistory user_name="user" profile_user="user" game_name="Catfishing" day={647}/>
                         <GameHistory user_name="user" profile_user="user" game_name="Queens" day={892}/>
-                        {/*<GameHistory />*/}
-                        {/*<GameHistory />*/}
-                        {/*<GameHistory />*/}
+                        <GameHistory user_name="user" profile_user="user" game_name="Linixicon" day={792}/>
+                        <GameHistory user_name="user" profile_user="user" game_name="Angle" day={1393}/>
+                        <GameHistory user_name="user" profile_user="user" game_name="Metazooa" day={988}/>
                         {/*<GameHistory />*/}
                         {/*<GameHistory />*/}
                     </div>
