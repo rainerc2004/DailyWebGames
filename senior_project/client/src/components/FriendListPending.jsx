@@ -46,10 +46,14 @@ export default function FriendListPending({user_name, profile_user}) {
 
     return (
         <div class="flex flex-col col-span-1 max-h-[525px] overflow-y-scroll gap-2">
+            <br></br>
             <div class="sticky top-0 w-full px-6 py-2 bg-zinc-700 text-white font-semibold">
                 Incoming requests
             </div>
-            <FriendStubPending user_name="this_user" />
+            <FriendStubPending user_name="mary100" />
+            <FriendStubPending user_name="mrgame" />
+            <FriendStubPending user_name="madison" />
+            <FriendStubPending user_name="pizza_90" />
             
             {/*{recordList()}*/}
         </div>

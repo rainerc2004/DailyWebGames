@@ -45,6 +45,7 @@ export default function FriendListAdded({user_name, profile_user}) {
 
     return (
         <div class="flex flex-col col-span-1 max-h-[525px] overflow-y-scroll gap-2">
+            <br></br>
             <div class="sticky top-0 w-full px-6 py-2 bg-zinc-700 text-white font-semibold">
                 Current friends
             </div>
