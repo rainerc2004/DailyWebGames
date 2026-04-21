@@ -62,6 +62,8 @@ router.get("/:id", async (req, res) => {
 // This section will help you create a new friend relationship.
 router.post("/add/:username1/:username2/:status", async (req, res) => {
     try {
+        // Check that username2 is a real user
+        console.log("add friend");
         let collection = await db.collection("users");
         let query = { user_name: {$eq: req.params.username2} };
         let result = await collection.findOne(query);
@@ -70,6 +72,7 @@ router.post("/add/:username1/:username2/:status", async (req, res) => {
             return;
         }
 
+        // Check that username1 and username2 are not already friends
         collection = await db.collection("friends");
         query = { user_name_1: {$eq: req.params.username2}, user_name_2: {$eq: req.params.username1}};
         result = await collection.findOne(query);
@@ -78,6 +81,7 @@ router.post("/add/:username1/:username2/:status", async (req, res) => {
             return;
         }
 
+        // Create new entry to Friends table
         let newDocument = {
             user_name_1: req.params.username1,
             user_name_2: req.params.username2,

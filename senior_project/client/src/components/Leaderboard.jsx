@@ -6,7 +6,7 @@ const Record = (props) => (
     </div>
 );
 
-export default function RecordList({user_name, game_name, day}) {
+export default function RecordList({user_name, display_user, game_name, day}) {
     const [records, setRecords] = useState([]);
     
     // This method fetches the scores from the database based on user's friends list, game_name, and day.
@@ -33,6 +33,9 @@ export default function RecordList({user_name, game_name, day}) {
     // This method will map out the records on the table
     function recordList() {
         return records.map((record, index) => {
+            if (record.user_name == "user") {
+                record.user_name = display_user;
+            }
             return (
                 <Record
                     index={index+1}

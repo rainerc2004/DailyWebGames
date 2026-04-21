@@ -1,0 +1,18 @@
+.center-image {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+}
+
+.title-text {
+    font-size: 20px
+}
+
+.instruction-text {
+    font-size: 18px;
+}
+
+.image-text {
+    font-size: 14px;
+}

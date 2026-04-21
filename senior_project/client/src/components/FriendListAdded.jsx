@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import FriendStub from "./FriendStub";
 
+// Display name of friend
 const Record = (props) => (
     <div>
+        test
         <FriendStub user_name={props.record.user_name_2} />
     </div>
 );
 
-export default function FriendListAdded({user_name, profile_user}) {
+export default function FriendListAdded({user_name = "user", profile_user}) {
     const [records, setRecords] = useState([]);
 
+    // Fetch a list of Friends of user_name
     useEffect(() => {
-        async function getRecords() {   // for some reason not being called????
+        async function getRecords() {  
             const response = await fetch(`http://localhost:5050/friend/friends/${user_name}`, {
                 method: 'GET',
                 headers: {
@@ -28,7 +31,7 @@ export default function FriendListAdded({user_name, profile_user}) {
         }
         getRecords();
         return;
-    }, [records.length]);
+    }, [records]);
     
     // This method will map out the records on the table
     function recordList() {
@@ -55,7 +58,9 @@ export default function FriendListAdded({user_name, profile_user}) {
             <FriendStub user_name="sally_b_4" />
             <FriendStub user_name="tom2847" />
 
-           {/*{recordList()}*/}
+            {/*
+            {recordList()}
+            */}
         </div>
     );
 }

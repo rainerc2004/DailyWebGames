@@ -6,7 +6,7 @@ import FriendListPending from "./FriendListPending";
 export default function FriendsPanel({user_name, profile_user}) {
     const [query, setQuery] = useState("");
 
-    
+    // Fetch all friends (user_name_2) of user_name (user_name_1)
     async function addFriend (user_name_1, user_name_2) {
         const response = await fetch(`http://localhost:5050/friend/add/${user_name_1}/${user_name_2}/pending`, {
             method: 'POST'

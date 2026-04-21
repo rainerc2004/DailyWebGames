@@ -30,7 +30,6 @@ router.get("/profile/:username", async (req, res) => {
     let collection = await db.collection("users");
     let query = { user_name: {$eq: req.params.username} };
     let result = await collection.findOne(query);
-    //console.log(result);
 
     if (!result) res.send("Not found").status(404);
     else res.send(result).status(200);
@@ -47,12 +46,22 @@ router.get("/login/:username/:password", async (req, res) => {
             res.status(500).send("Username doesn't exist");
             return;
         }
+
+        // Undo password hash and compare 
         const match = await bcrypt.compare(req.params.password, exists.password);
         if (!match) {
             res.status(500).send("Incorrect password");
             return;
         }
         res.send().status(200);
+
+        query = { user_name: {$eq: "user"} };
+        const updates = {
+            $set: {
+                display_user: req.params.username
+            },
+        };
+        let result = await collection.updateOne(query, updates);
     } catch (err) {
         console.error(err);
         res.status(500).send("Error adding user");
@@ -92,7 +101,7 @@ router.get("/:id", async (req, res) => {
 // This section will help you sign up a new user.
 router.post("/sign_up/:username/:password", async (req, res) => {
     try {
-        console.log("test");
+        // Check if username exists
         let collection = await db.collection("users");
         let query = { user_name: {$eq: req.params.username} };
         let exists = await collection.findOne(query);
@@ -100,21 +109,30 @@ router.post("/sign_up/:username/:password", async (req, res) => {
             res.status(500).send("Username already exists!");
             return;
         }
-        console.log(exists);
 
+        // Hash password
         const hash = await bcrypt.hash(req.params.password, salt);
 
+        // Create new database entry
         let newDocument = {
             user_name: req.params.username,
             password: hash,
             display_name: req.params.username,
+            display_user: req.params.username,
             profile_image: "default.jpg",
             description: "",
             main_list: ""
         };
-        console.log(newDocument);
         let result = await collection.insertOne(newDocument);
         res.send(result).status(204);
+
+        query = { user_name: {$eq: "user"} };
+        const updates = {
+            $set: {
+                display_user: req.params.username
+            },
+        };
+        result = await collection.updateOne(query, updates);
     } catch (err) {
         console.error(err);
         res.status(500).send("Error adding user");
@@ -153,6 +171,65 @@ router.patch("/setlist/:listname/:username", async (req, res) => {
         let collection = await db.collection("users");
         let result = await collection.updateOne(query, updates);
 
+        res.send(result).status(200);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error updating user");
+    }
+});
+
+
+// This section will help you update a user's description by user_name.
+router.patch("/update_bio/:username/:bio", async (req, res) => {
+    try {
+        const query = { user_name: {$eq: req.params.username} };
+        const updates = {
+            $set: {
+                description: req.params.bio
+            },
+        };
+
+        let collection = await db.collection("users");
+        let result = await collection.updateOne(query, updates);
+        res.send(result).status(200);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error updating user");
+    }
+});
+
+// This section will help you update a user's display_name by user_name.
+router.patch("/update_displayname/:username/:displayname/", async (req, res) => {
+    try {
+        const query = { user_name: {$eq: req.params.username} };
+        const updates = {
+            $set: {
+                display_name: req.params.displayname
+            },
+        };
+
+        let collection = await db.collection("users");
+        let result = await collection.updateOne(query, updates);
+        res.send(result).status(200);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error updating user");
+    }
+});
+
+// This section will help you update a user by user_name.
+router.patch("/update_user/:displayuser/", async (req, res) => {
+    try {
+        console.log(req.params.displayuser);
+        const query = { user_name: {$eq: "user"} };
+        const updates = {
+            $set: {
+                display_user: req.params.displayuser
+            },
+        };
+
+        let collection = await db.collection("users");
+        let result = await collection.updateOne(query, updates);
         res.send(result).status(200);
     } catch (err) {
         console.error(err);

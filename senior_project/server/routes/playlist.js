@@ -35,7 +35,6 @@ router.get("/listname/:listname", async (req, res) => {
     let collection = await db.collection("playlists");
     let query = { list_name: {$eq: req.params.listname} };
     let result = await collection.findOne(query);
-    console.log(result);
 
     res.send(result).status(200);
 });

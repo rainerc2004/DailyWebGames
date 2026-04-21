@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GameCard from "./GameCard";
 
+// Display GameCard for each game in the search results
 const Record = (props) => (
     <div className="flex flex-col gap-6">
         <GameCard game_name={props.record.game_name} game_link={props.record.game_link}/>
@@ -11,7 +12,7 @@ const Record = (props) => (
 export default function RecordList({search}) {
     const [records, setRecords] = useState([]);
     
-    // This method fetches the scores from the database based on user's friends list, game_name, and day.
+    // This method fetches the list of games matching the provided search
     useEffect(() => {
         async function getRecords() {
             const response = await fetch(`http://localhost:5050/game/search/${search}`, {

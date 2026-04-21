@@ -27,12 +27,14 @@ export default function ListPanel({ user_name, list_name, owner_user_name }) {
         return;
     })
 
+    // Set a list as the current user's default list
     async function setList(username, listname) {
         const response = await fetch(`http://localhost:5050/user/setlist/${listname}/${username}`, {
             method: 'PATCH'
         });
     }
 
+    // If current user owns the list, display Edit List button
     function renderButtons(username, ownername) {
         if(username == ownername) {
             return (
@@ -59,7 +61,7 @@ export default function ListPanel({ user_name, list_name, owner_user_name }) {
                 {list_info.description}</div>
             </div>
             <div class="flex flex-col gap-2">
-                {renderButtons(user_name, list_info.owner_user_name)}
+                {/*renderButtons(user_name, list_info.owner_user_name)*/}
                 <button
                 className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center"
                 onClick={() => setList(user_name, list_name)} >

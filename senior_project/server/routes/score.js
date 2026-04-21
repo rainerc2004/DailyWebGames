@@ -90,15 +90,13 @@ router.get("/leaderboard/:username/:gamename/:day", async (req,res) => {
     collection = await db.collection("games");
     query = { game_name: {$eq: req.params.gamename} };
     results = await collection.findOne(query);
-    //console.log(req.params.gamename);
-    
+
     let sort_direction = 1;
     if(results.score_goal == 'min') {
         sort_direction = 1;
     } else if(results.score_goal == 'max') {
         sort_direction = -1;
     } else {
-        //throw new Error('Error: score_goal not declared for ', req.params.gamename);
         res.send().status(404);
     }
 
@@ -144,12 +142,13 @@ router.post("/", async (req, res) => {
 // This section will help you update a score by user_name and game_name.
 router.patch("/update/:username/:gamename/day/:scorestr", async (req, res) => {
     try {
-        console.log(req.params.scorestr);
+        // Find current day of given game
         let collection = await db.collection("games");
         let query = { game_name: {$eq: req.params.gamename} };
         let result = await collection.findOne(query);
         let current_day = result.current_day;
 
+        // Replace a score of 'X' with a number that will sort to bottom of leaderboard
         let scoreint = 0;
         if(req.params.scorestr == "X") {
             if(result.score_goal == "min") {
@@ -160,8 +159,8 @@ router.patch("/update/:username/:gamename/day/:scorestr", async (req, res) => {
         } else {
             scoreint = Number(scorestr);
         }
-        console.log(scoreint);
 
+        // Update entry in database
         collection = await db.collection("scores");
         query = { 
             user_name: {$eq: req.params.username}, 

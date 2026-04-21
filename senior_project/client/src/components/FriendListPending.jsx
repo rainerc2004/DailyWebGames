@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import FriendStubPending from "./FriendStubPending";
 
+// Display name of friend
 const Record = (props) => (
     <div>
         <FriendStubPending user_name={props.record.user_name_1} />
@@ -10,6 +11,7 @@ const Record = (props) => (
 export default function FriendListPending({user_name, profile_user}) {
     const [records, setRecords] = useState([]);
 
+    // Fetch a list of Pending friend invites to user_name
     useEffect(() => {
         async function getRecords() {   // for some reason not being called????
             const response = await fetch(`http://localhost:5050/friend/invites/${user_name}`, {
@@ -28,7 +30,7 @@ export default function FriendListPending({user_name, profile_user}) {
         }
         getRecords();
         return;
-    }, [records.length]);
+    }, [records]);
     
     // This method will map out the records on the table
     function recordList() {
@@ -50,12 +52,7 @@ export default function FriendListPending({user_name, profile_user}) {
             <div class="sticky top-0 w-full px-6 py-2 bg-zinc-700 text-white font-semibold">
                 Incoming requests
             </div>
-            <FriendStubPending user_name="mary100" />
-            <FriendStubPending user_name="mrgame" />
-            <FriendStubPending user_name="madison" />
-            <FriendStubPending user_name="pizza_90" />
-            
-            {/*{recordList()}*/}
+
         </div>
     );
 }

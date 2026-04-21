@@ -43,7 +43,6 @@ router.get("/game_name/:game_name", async (req, res) => {
     let collection = await db.collection("games");
     let query = { game_name: {$eq: req.params.game_name} };
     let result = await collection.findOne(query);
-    console.log(req.params.game_name);
 
     if (!result) res.send("Not found").status(404);
     else res.send(result).status(200);

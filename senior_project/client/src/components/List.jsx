@@ -14,7 +14,6 @@ const Record = (props) => (
 const List = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const list_name = urlParams.get('list');
-    //const list_name = "name of list";
     const [records, setRecords] = useState(list_name);
 
     // This method fetches the list of games in the provided list

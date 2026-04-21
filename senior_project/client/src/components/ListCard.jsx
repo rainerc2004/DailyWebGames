@@ -1,6 +1,7 @@
 export default function ListCard({list_name, owner_user_name}) {
     var link = "/list/?list=".concat(list_name);
 
+    // Set a list as the current user's default list
     async function setList(username, listname) {
         const response = await fetch(`http://localhost:5050/user/setlist/${listname}/${username}`, {
             method: 'PATCH'

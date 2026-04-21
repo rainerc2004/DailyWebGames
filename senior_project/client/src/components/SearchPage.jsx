@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import SearchResultsUser from "./SearchResultsUser";
 import SearchResultsList from "./SearchResultsList";
@@ -15,11 +13,11 @@ const SearchPage = () => {
             <Navbar />
             <div className="grid flex flex-1 overflow-hidden grid-cols-3 px-3">
                 
-                <SearchResultsUser search={search}/>
+                <SearchResultsUser search={search}/> {/* User profile search results */}
 
-                <SearchResultsList search={search}/>
+                <SearchResultsList search={search}/> {/* List search results */}
 
-                <SearchResultsGame search={search}/>
+                <SearchResultsGame search={search}/> {/* Game search results */}
 
             </div>
         </div>

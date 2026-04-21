@@ -1,13 +1,6 @@
-import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PlayNavbar from "./PlayNavbar";
-import Leaderboard from "./Leaderboard";
 
-/*
-const game_name = "Wordle";
-const updateGame = ({game}) => {
-    game_name = game;
-}*/
 
 const Play = ({}) => {
     const [game, setGame] = useState("Wordle");
@@ -32,7 +25,7 @@ const Play = ({}) => {
         }
         getRecord();
         return;
-    });
+    }, [game]);
 
 
     return (

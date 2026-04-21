@@ -7,7 +7,7 @@ const Record = (props) => (
     </div>
 );
 
-export default function GameHistory({user_name, game_name, day}) {
+export default function GameHistory({user_name, display_user, game_name, day}) {
     const [records, setRecords] = useState([]);
     
     // This method fetches the scores from the database based on user's friends list, game_name, and day.

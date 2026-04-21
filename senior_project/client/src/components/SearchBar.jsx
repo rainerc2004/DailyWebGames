@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function SearchBar() {
     const [query, setQuery] = useState("");
 
+    // On enter, load search results page with provided query
     const handleSearch = () => {
         console.log("Searching for:", query);
         window.location.href = "/search/?search=".concat(query);

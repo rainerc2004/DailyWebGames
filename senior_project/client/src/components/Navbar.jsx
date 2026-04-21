@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
+//Navbar present at the top of each window after login page
 export default function Navbar() {
     return (
         <div>

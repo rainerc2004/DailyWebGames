@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProfileCard from "./ProfileCard";
 
+
+// Display ProfileCard for each user in the search results
 const Record = (props) => (
     <div className="flex flex-col gap-6">
-        <ProfileCard user_name={props.record.user_name} display_name={props.record.display_name} image_name={props.record.profile_image}/>
+        <ProfileCard user_name={props.record.user_name} display_name={props.record.display_name} display_user={props.record.display_user} image_name={props.record.profile_image}/>
     </div>
 );
 
 export default function RecordList({search}) {
     const [records, setRecords] = useState([]);
     
-    // This method fetches the scores from the database based on user's friends list, game_name, and day.
+    // This method fetches the users matching the search query
     useEffect(() => {
         async function getRecords() {
             const response = await fetch(`http://localhost:5050/user/search/${search}`, {

@@ -6,14 +6,13 @@ import Leaderboard from "./Leaderboard";
 
 const Record = (props) => (
     <div class= "grow px-6 py-6 bg-zinc-900 text-white font-semibold rounded-lg text-left">
-        <Leaderboard user_name={props.user_name} game_name={props.record.game_name} day={props.record.day} />
+        <Leaderboard user_name={props.user_name} display_user={props.display_user} game_name={props.record.game_name} day={props.record.day} />
     </div>
 );
 
-export default function LeaderboardPage({user_name}) {
+export default function LeaderboardPage({user_name="user"}) {
     const [records, setRecords] = useState([]);
-    let location = useLocation();
-    user_name = location.state.user_name;
+    const [profile, setProfile] = useState('');
     
     // This method fetches the scores from the database based on user's friends list, game_name, and day.
     useEffect(() => {
@@ -35,10 +34,31 @@ export default function LeaderboardPage({user_name}) {
         getRecords();
         return;
     }, [records.length]);
+
+    // This method fetches the user's profile from the database
+    useEffect(() => {
+        async function getProfile() {
+            const response = await fetch(`http://localhost:5050/user/profile/${user_name}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                const message = `An error occurred: ${response.statusText}`;
+                console.error(message);
+                return;
+            }
+            const profile = await response.json();
+            setProfile(profile);
+        }
+        getProfile();
+        return;
+    }, [profile]);
     
     
     // This method will map out the records on the table
-    function recordList() {
+    function recordList(display_user) {
         let table_0 = [];
         let table_1 = [];
         let table_2 = [];
@@ -46,6 +66,7 @@ export default function LeaderboardPage({user_name}) {
         let table_4 = [];
         let count = 0;
 
+        //Dynamically populate 5 tables evenly with the scores in the database
         for(let i = 0; i < records.length; i++) {
             if (count == 0) {
                 table_0.push(records[i]);
@@ -62,11 +83,12 @@ export default function LeaderboardPage({user_name}) {
             count += 1;
         }   
 
-        let map_0 = table_0.map((record) => { return (<Record user_name={user_name} record={record} />); });
-        let map_1 = table_1.map((record) => { return (<Record user_name={user_name} record={record} />); });
-        let map_2 = table_2.map((record) => { return (<Record user_name={user_name} record={record} />); });
-        let map_3 = table_3.map((record) => { return (<Record user_name={user_name} record={record} />); });
-        let map_4 = table_4.map((record) => { return (<Record user_name={user_name} record={record} />); });
+        // Map the records to each table
+        let map_0 = table_0.map((record) => { return (<Record user_name={user_name} record={record} display_user={display_user}/>); });
+        let map_1 = table_1.map((record) => { return (<Record user_name={user_name} record={record} display_user={display_user}/>); });
+        let map_2 = table_2.map((record) => { return (<Record user_name={user_name} record={record} display_user={display_user}/>); });
+        let map_3 = table_3.map((record) => { return (<Record user_name={user_name} record={record} display_user={display_user}/>); });
+        let map_4 = table_4.map((record) => { return (<Record user_name={user_name} record={record} display_user={display_user}/>); });
 
         return (
             <div className="grid flex flex-col flex-1 items-start justify-start grid-cols-5 px-3">
@@ -82,7 +104,7 @@ export default function LeaderboardPage({user_name}) {
     return (
         <div className="flex flex-col h-screen">
             <Navbar />
-            {recordList()}
+            {recordList(profile.display_user)}
         </div>
     );
 };

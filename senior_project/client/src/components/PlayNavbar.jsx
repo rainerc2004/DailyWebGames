@@ -24,42 +24,62 @@ export default function PlayNavbar({ updateGame }) {
                         onClick={function() { updateGame("Wordle")}}
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                         Wordle
-                    </button>
+                    </button> {/* Button click updates the game in Play.jsx */}
                     <button
                         onClick={function() { updateGame("Octordle")}}
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                         Octordle
-                    </button>
+                    </button> {/* Button click updates the game in Play.jsx */}
                     <button
                         onClick={() => updateGame("Metazooa")}
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                         Metazooa
-                    </button>
+                    </button> {/* Button click updates the game in Play.jsx */}
                     <button
                         onClick={() => updateGame("Angle")}
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                         Angle
-                    </button>
+                    </button> {/* Button click updates the game in Play.jsx */}
                     <button
                         onClick={() => updateGame("Waffle")}
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                         Waffle
-                    </button>
+                    </button> {/* Button click updates the game in Play.jsx */}
                     <button
                         onClick={() => updateGame("Linixicon")}
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                         Linixicon
-                    </button>
+                    </button> {/* Button click updates the game in Play.jsx */}
                     <button
-                        onClick={() => updateGame("Catfishing")}
+                        onClick={() => updateGame("Timdle")}
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
-                        Catfishing
-                    </button>
+                        Timdle
+                    </button> {/* Button click updates the game in Play.jsx */}
                     <button
-                        onClick={() => updateGame("Queens")}
+                        onClick={() => updateGame("Breadle")}
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
-                        Queens
-                    </button>
+                        Breadle
+                    </button> {/* Button click updates the game in Play.jsx */}
+                    <button
+                        onClick={() => updateGame("Globle")}
+                        className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                        Globle
+                    </button> {/* Button click updates the game in Play.jsx */}
+                    <button
+                        onClick={() => updateGame("Framed")}
+                        className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                        Framed
+                    </button> {/* Button click updates the game in Play.jsx */}
+                    <button
+                        onClick={() => updateGame("Guess the Game")}
+                        className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                        Guess The.Game
+                    </button> {/* Button click updates the game in Play.jsx */}
+                    <button
+                        onClick={() => updateGame("Hexcodle")}
+                        className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
+                        Hexcodle
+                    </button> {/* Button click updates the game in Play.jsx */}
                     </div>
                 <div class="flex flex-none gap-3">
                     <input
@@ -71,10 +91,7 @@ export default function PlayNavbar({ updateGame }) {
                     />
                     <button onClick={function() {handleScore()}} className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
                         Paste Score!
-                    </button>
-                    <button className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">
-                        Next Game!
-                    </button>
+                    </button> {/* Button click stores the user's score on the database */}
                     <NavLink
                         to="/profile"
                         className="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center">

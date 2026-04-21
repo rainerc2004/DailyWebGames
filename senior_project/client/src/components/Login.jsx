@@ -14,6 +14,7 @@ export default function Login() {
     const [signup_message, setSignupMessage] = useState("");
 
 
+    // Fetch existing database entry for given username and password
     async function handleLogin(username, password) {
         const response = await fetch(`http://localhost:5050/user/login/${username}/${password}`, {
             method: 'GET'
@@ -26,10 +27,10 @@ export default function Login() {
         }
         setLoginMessage("Logging in!");
         window.location.href = "/home";
-        //login({ name: "user" });
     };
 
     async function handleSignup(username, password, confirm) {
+        // Sign up validation
         if(username == "" || password == "" || confirm == "") { 
             return; 
         }
@@ -45,6 +46,7 @@ export default function Login() {
             setSignupMessage("Password must be between 8 and 32 characters!");
             return;
         }
+        // Create new database entry with username and password
         const response = await fetch(`http://localhost:5050/user/sign_up/${username}/${password}`, {
             method: 'POST'
         });
@@ -56,65 +58,69 @@ export default function Login() {
         }
         setSignupMessage("Account created!");
         window.location.href = "/home";
-        //login({ name: "user" });
     };
 
     return (
-        <div className="flex flex-row h-screen items-center justify-center gap-24 text-white font-semibold">
-            <div className="flex flex-col gap-3 items-center">
-                Log in
-                <input
-                    type="text"
-                    value={login_username}
-                    onChange={(e) => setLoginUsername(e.target.value)}
-                    placeholder="Username"
-                    className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
-                />
-                <input
-                    type="text"
-                    value={login_password}
-                    onChange={(e) => setLoginPassword(e.target.value)}
-                    placeholder="Password"
-                    className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
-                />
-                <button
-                    onClick={function() {handleLogin(login_username, login_password)}}
-                    className="w-1/2 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center"
-                >
-                    Log in!
-                </button>
-                {login_message}
-            </div>
-            <div className="flex flex-col gap-3 items-center">
-                Sign up
-                <input
-                    type="text"
-                    value={signup_username}
-                    onChange={(e) => setSignupUsername(e.target.value)}
-                    placeholder="Enter username"
-                    className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
-                />
-                <input
-                    type="text"
-                    value={signup_password}
-                    onChange={(e) => setSignupPassword(e.target.value)}
-                    placeholder="Enter password"
-                    className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
-                />
-                <input
-                    type="text"
-                    value={signup_confirm}
-                    onChange={(e) => setSignupConfirm(e.target.value)}
-                    placeholder="Confirm password"
-                    className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
-                />
-                <button
-                    onClick={function() {handleSignup(signup_username, signup_password, signup_confirm)}}
-                    className="w-1/2 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center"
-                >
-                    Sign up!
-                </button>
-                {signup_message}
+        <div>
+            <div className="h-20 bg-gray-300 text-black font-semibold rounded-lg text-center text-6xl">
+                    Search & Play Daily Web Games
+                </div>
+            <div className="flex flex-row h-screen items-center justify-center gap-24 text-white font-semibold">
+                <div className="flex flex-col gap-3 items-center">
+                    Log in
+                    <input
+                        type="text"
+                        value={login_username}
+                        onChange={(e) => setLoginUsername(e.target.value)}
+                        placeholder="Username"
+                        className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
+                    />
+                    <input
+                        type="text"
+                        value={login_password}
+                        onChange={(e) => setLoginPassword(e.target.value)}
+                        placeholder="Password"
+                        className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
+                    />
+                    <button
+                        onClick={function() {handleLogin(login_username, login_password)}}
+                        className="w-1/2 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center"
+                    >
+                        Log in!
+                    </button>
+                    {login_message}
+                </div>
+                <div className="flex flex-col gap-3 items-center">
+                    Sign up
+                    <input
+                        type="text"
+                        value={signup_username}
+                        onChange={(e) => setSignupUsername(e.target.value)}
+                        placeholder="Enter username"
+                        className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
+                    />
+                    <input
+                        type="text"
+                        value={signup_password}
+                        onChange={(e) => setSignupPassword(e.target.value)}
+                        placeholder="Enter password"
+                        className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
+                    />
+                    <input
+                        type="text"
+                        value={signup_confirm}
+                        onChange={(e) => setSignupConfirm(e.target.value)}
+                        placeholder="Confirm password"
+                        className="w-96 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg"
+                    />
+                    <button
+                        onClick={function() {handleSignup(signup_username, signup_password, signup_confirm)}}
+                        className="w-1/2 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow hover:bg-gray-400 active:scale-95 transition text-center"
+                    >
+                        Sign up!
+                    </button>
+                    {signup_message}
+                </div>
             </div>
         </div>
     );

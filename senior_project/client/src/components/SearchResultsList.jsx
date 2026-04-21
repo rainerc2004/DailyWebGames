@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ListCard from "./ListCard";
 
-
+// Display ListCard for each item in the search results
 const Record = (props) => (
     <div className="flex flex-col gap-6">
         <ListCard list_name={props.record.list_name} owner_user_name={props.record.owner_user_name}/>
